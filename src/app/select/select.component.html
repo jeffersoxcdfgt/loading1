@@ -1,0 +1,6 @@
+<p *ngIf="!loading else loadingTmpl">
+    select works!
+  </p>
+  <ng-template #loadingTmpl>
+    Select is being loaded
+  </ng-template>
