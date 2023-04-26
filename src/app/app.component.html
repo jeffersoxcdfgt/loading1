@@ -1,4 +1,4 @@
-<h3>Simple observable</h3>
+<!--h3>Simple observable</h3>
 <div *ngIf="obs$ | withLoading | async as obs">
   <ng-template [ngIf]="obs && obs.hasOwnProperty('value')">Value: {{ (obs | json | jsonParse).value }}</ng-template>
   <ng-template [ngIf]="obs && obs.hasOwnProperty('error')">Error  {{ (obs | json | jsonParse).error }}</ng-template>
@@ -24,4 +24,35 @@
 <h3>Passing loading to child component</h3>
 <div *ngIf="obs$ | withLoading | async as obs">
   <app-select [loading]="(obs | json | jsonParse).loading"></app-select>
+</div>-->
+
+<!-- With strictTemplates=false in tsconfig.json -->
+<h3>Simple observable</h3>
+<div *ngIf="obs$ | withLoading | async as obs">
+  <ng-template [ngIf]="obs.value">Value: {{ obs.value }}</ng-template>
+  <ng-template [ngIf]="obs.error">Error {{ obs.error }}</ng-template>
+  <ng-template [ngIf]="obs.loading">Loading...</ng-template>
 </div>
+
+
+<h3>Observable with falsy value</h3>
+<div *ngIf="obs2$ | withLoading | async as obs">
+  <ng-template [ngIf]="!obs.error && !obs.loading">Value: {{ obs.value }}</ng-template>
+  <ng-template [ngIf]="obs.error">Error {{ obs.error }}</ng-template>
+  <ng-template [ngIf]="obs.loading">Loading...</ng-template>
+</div>
+
+<h3>Observable with an error</h3>
+<div *ngIf="obs3$ | withLoading | async as obs">
+  <ng-template [ngIf]="!obs.error && !obs.loading">Value: {{ obs.value }}</ng-template>
+  <ng-template [ngIf]="obs.error">Error {{ obs.error }}</ng-template>
+  <ng-template [ngIf]="obs.loading">Loading...</ng-template>
+</div>
+
+
+<h3>Passing loading to child component</h3>
+<div *ngIf="obs$ | withLoading | async as obs">
+  <app-select [loading]="obs.loading"></app-select>
+</div>
+
+
